@@ -120,9 +120,97 @@ const characters = [
   }
 ]
 
+// STAR WARS ÖDEV 2
+
+const homeworldsRaw = [];
+
+for (const character of characters) {
+  homeworldsRaw.push(character.homeworld ?? "other");
+}
+
+const homeworldsUnique = [...new Set(homeworldsRaw)];
+
+const homeworldsLowerCase = [];
+
+for (const uniqueHomeworld of homeworldsUnique) {
+  homeworldsLowerCase.push(uniqueHomeworld.toLowerCase());
+}
+
+const homeworlds = homeworldsLowerCase;
+
+const filters_element = document.getElementById("filters");
+
+for (const homeworld of homeworlds) {
+  const RadioElement = `
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio-${homeworld}">
+  <label class="form-check-label" for="radio-${homeworld}">
+  ${homeworld}
+  </label>
+</div>
+  `;
+
+  filters_element.innerHTML += RadioElement;
+}
+
+let radios = document.querySelectorAll('#filters input[type="radio"]');
+
+let filter_value = null;
+
+for (const radio of radios) { 
+  radio.addEventListener("change", function (e) {
+    console.log(e);
+    filter_value = e.target.value;
+    removeCharacters();
+    renderCharacters();
+  });
+}
+
+
 //STAR WARS ÖDEV 1
 
-const row = document.querySelector(".row")
+ const content_wrapper = document.getElementById("content");
+const render_c = document.getElementById("render");
+render_c.onclick = renderCharacters;
+
+function renderCharacters() {
+  const row_element = document.createElement("div");
+  row_element.classList.add("row");
+  for (const character of characters) {
+    const homeworld_name = character.homeworld ?? "other";
+    const homeworld_name_lowercase = homeworld_name.toLowerCase();
+    if (homeworld_name_lowercase === filter_value || filter_value === null) {
+    const CharacterCard = `
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+       <div class="card">
+          <img src="${characterPic}" class="card-img-top" alt="${characterName}">
+          <div class="card-body">
+              <h5 class="card-title">${characterName}</h5>
+              <p class="card-text">${characterHomeworld}</p>
+         </div>
+      </div>
+    </div>`;
+    row_element.innerHTML = row_element.innerHTML + CharacterCard;
+    }
+    render_c.innerHTML = "Karakterleri Gizle";
+    render_c.style.backgroundColor = "red;"
+    render_c.onclick = removeCharacters;
+  }
+
+  content_wrapper.appendChild(row_element);
+}
+
+function removeCharacters() {
+  content_wrapper.innerHTML = "";
+  render_c.onclick = renderCharacters;
+  render_c.style.backgroundColor = "green";
+  render_c.style.color = "white";
+  render_c.innerText = "Karakterleri Göster"
+} 
+
+// DENEME 1
+/* 
+ const row = document.querySelector(".row")
 let show=true;
 
   document.getElementById("render").addEventListener ("click",function(renderCharacters){
@@ -145,11 +233,11 @@ for (character of characters) {
       </div>
     </div>`;
   } 
-} /* else {charactersEl.innerHTML = "";} */
-})
+}  else {charactersEl.innerHTML = "";} 
+}) */
+ 
 
-
-//aşağıdakiler farklı denemeler
+//DENEME 2
 
 /* const row = document.querySelector(".row")
 characters.forEach(function (item, index) {
@@ -165,6 +253,8 @@ characters.forEach(function (item, index) {
     </div>
 `
 }) */
+
+// DENEME 3
 
 /* const row = document.querySelector(".row")
 let show = true;
@@ -190,8 +280,8 @@ document.getElementById("render").addEventListener("click", function (renderChar
 
 // STAR WARS ÖDEV 2
 
-let homeworldsRaw = characters.map((a) => a.homeworld);
-console.log(homeworldsRaw);
+/* let homeworldsRaw = characters.map((a) => a.homeworld);
+console.log(homeworldsRaw); */
 
 /* const homeworldsUnique = homeworldsRaw
 

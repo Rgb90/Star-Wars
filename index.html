@@ -10,28 +10,11 @@
 </head>
 
 <body>
-    <section class="container">
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              Default radio
-            </label>
-          </div>
-
-        <button onclick="renderCharacters()" id="render">Karakterleri göster!</button>
-        <div class="row gx-3 gy-5" id="characters">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div>
-                        <img>
-                        <div>
-                            <h5></h5>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section>
+        <div class="container">
+            <button id="render" class="render">Karakterleri Göster</button>
+            <div id="filters"></div>
+            <div id="content"></div>
         </div>
     </section>
 
