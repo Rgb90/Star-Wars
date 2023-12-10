@@ -120,9 +120,14 @@ const characters = [
   }
 ]
 
+const content_wrapper = document.getElementById("content");
+const render_c = document.getElementById("render");
+render_c.onclick = renderCharacters;
+
+
 // STAR WARS ÖDEV 2
 
-const filter_container = document.getElementById("filter-container");
+const filter_container = document.getElementById("filter_container");
 
 const homeworldsRaw = [];
 
@@ -149,34 +154,32 @@ const homeworlds = homeworldsLowerCase;
 for (const homeworld of homeworlds) {
   const radio_element = `
   <div class="form-check">
-  <input value="${homeworld}" class="form-check-input" type="radio" name="homeWorld" id="filter-${homeworld}">
+  <input value="${homeworld}" class="form-check-input" type="radio" name="homeworld" id="filter-${homeworld}">
   <label class="form-check-label" for="filter-${homeworld}">
   ${homeworld}
   </label>
-</div>`;
+</div>`;    //name'in içindeki homeworld'un w harfi büyük olduğu için filtreleme çalışmamış.
 
 filter_container.innerHTML += radio_element;
 }
 
 let filterValue = null;
-/* let rad = document.querySelector('#filter_container input[type="radio"]') */
+let rad = document.homeworlds_filter.homeworld;
 for (var i = 0; rad.length > i; i++) {
   rad[i].addEventListener("change", function () {
     filterValue = this.value;
+    renderCharacters();
   });
 }
 
 //STAR WARS ÖDEV 1
 
- const content_wrapper = document.getElementById("content");
-const render_c = document.getElementById("render");
-render_c.onclick = renderCharacters;
 
 function renderCharacters() {
   const row_element = document.createElement("div");
   row_element.classList.add("row");
 
-  content_wrapper.innerHTML = " ";
+  content_wrapper.innerHTML = "";
   for (const character of characters) {
     if (
       filterValue === null ||
@@ -203,7 +206,6 @@ function renderCharacters() {
 content_wrapper.appendChild(row_element);
   }
 
-  
 
 function removeCharacters() {
   content_wrapper.innerHTML = "";
@@ -212,86 +214,3 @@ function removeCharacters() {
   render_c.style.color = "white";
   render_c.innerText = "Karakterleri Göster"
 } 
-
-// DENEME 1
-/* 
- const row = document.querySelector(".row")
-let show=true;
-
-  document.getElementById("render").addEventListener ("click",function(renderCharacters){
-  if (show===true){
-const charactersEl = document.getElementById("characters");
-
-for (character of characters) {
-    const characterName = character.name;
-    const characterPic = character.pic;
-    const characterHomeworld = character.homeworld;
- 
-  charactersEl.innerHTML += `
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-       <div class="card">
-          <img src="${characterPic}" class="card-img-top" alt="...">
-          <div class="card-body">
-              <h5 class="card-title">${characterName}</h5>
-              <p class="card-text">${characterHomeworld}</p>
-         </div>
-      </div>
-    </div>`;
-  } 
-}  else {charactersEl.innerHTML = "";} 
-}) */
- 
-
-//DENEME 2
-
-/* const row = document.querySelector(".row")
-characters.forEach(function (item, index) {
-  row.innerHTML += `
-    <div class="col-lg-4">
-       <div class="card">
-          <img src="${item.pic}" class="card-img-top" alt="...">
-          <div class="card-body">
-              <h5 class="card-title">${item.name}</h5>
-              <p class="card-text">${item.homeworld}</p>
-         </div>
-      </div>
-    </div>
-`
-}) */
-
-// DENEME 3
-
-/* const row = document.querySelector(".row")
-let show = true;
-
-document.getElementById("render").addEventListener("click", function (renderCharacters) {
-  if (show === true) {
-    for (let i = 0; i < characters.length; i++) {
-      const character = characters[i];
-      console.log(character);
-      row.innerHTML += `
-  <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-     <div class="card">
-        <img src="${characters[i].pic}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">${characters[i].name}</h5>
-            <p class="card-text">${characters[i].homeworld}</p>
-       </div>
-    </div>
-  </div>
-`}
-  }
-}) */
-
-// STAR WARS ÖDEV 2
-
-/* let homeworldsRaw = characters.map((a) => a.homeworld);
-console.log(homeworldsRaw); */
-
-/* const homeworldsUnique = homeworldsRaw
-
-function homeworldsUnique(a) {
-  return a.sort().filter(function(item, pos, ary) {
-      return !pos || item != ary[pos - 1];
-  });
-} */
